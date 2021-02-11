@@ -19,7 +19,7 @@ Useful default settings for bash in one file
 - - *Mod*: Shows the hostname when logging in via ssh
 - Colored less
 - Alias `mkcd` - make and change directory at once
-- Aliases `ls`, `la`, `l`, `gitlog`, `gotree`
+- Aliases `ls`, `la`, `l`, `gitlog`, `gittree`
 - Universal commands for extracting(`extract`) and packing(`pk`) archives
 - Will use [bash-completion](https://github.com/scop/bash-completion), if installed
 - Will provide new commands `cd` and `fkill`, if `fzf` installed
