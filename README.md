@@ -1,7 +1,7 @@
 # Cute-bash
 Useful default settings for bash in one file
 
-![image](https://user-images.githubusercontent.com/25588359/107620693-02315080-6c4d-11eb-90ae-f67418306dcc.png)
+![image](https://user-images.githubusercontent.com/25588359/107625132-c6e65000-6c53-11eb-8673-80a8c9febdd4.png)
 
 ## Features
 - One file. Easy installation
