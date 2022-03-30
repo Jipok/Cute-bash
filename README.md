@@ -33,7 +33,7 @@ Per user:
 `wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O ~/.bashrc`
 
 System-wide:
-`wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/bash.bashrc`
+`wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/bash/bashrc`
 
 Of course this will replace the original files if they were. 
 
