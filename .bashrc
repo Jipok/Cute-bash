@@ -193,7 +193,8 @@ __powerline() {
             local git="$COLOR_GIT$(__git_info)$RESET"
         fi
 
-        if [ -z "$(w | grep FROM)" ]; then
+        # Print hostname for remote connections
+        if [ -z "$(w -i | grep -P '([0-9]{1,3}[\.]){3}[0-9]{1,3}')" ]; then
             PS1="$cwd$git$symbol"
         else
             PS1="\[\033[01;32m\]\u@\h\[\033[00m\]: $cwd$git$symbol"
