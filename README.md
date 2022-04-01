@@ -32,7 +32,10 @@ Useful default settings for bash in one file
 Per user:
 `wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O ~/.bashrc`
 
-System-wide:
+System-wide(debian, arch):
+`wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/bash.bashrc`
+
+System-wide(void linux):
 `wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/bash/bashrc`
 
 Of course this will replace the original files if they were. 
