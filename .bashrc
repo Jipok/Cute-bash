@@ -340,9 +340,14 @@ if [[ $- = *i* ]]; then
         source /usr/share/bash-completion/bash_completion
 
     # Download and use LS_COLORS
-    [ -f $HOME/.ls_colors ] || wget \
-        "https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS" -O ~/.ls_colors
-    eval $( dircolors -b $HOME/.ls_colors )
+    if [ -f /etc/bash/ls_colors ]; then
+        eval $( dircolors -b /etc/bash/ls_colors )
+    else    
+        if [ ! -f $HOME/.ls_colors ]; then
+            wget "https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS" -O ~/.ls_colors
+        fi
+        eval $( dircolors -b $HOME/.ls_colors )
+    fi
 
     # Attach to tmux session, if exist
     if command -v tmux &> /dev/null && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
