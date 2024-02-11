@@ -5,6 +5,9 @@ export TERM=xterm-256color
 # Make and change directory at once
 alias mkcd='_(){ mkdir -p "$(echo $@)"; cd "$(echo $@)"; }; _'
 
+# Tmux attach or new with mouse support
+alias t='tmux set-option -g mouse on \; attach || tmux set-option -g mouse on \; new'
+
 alias ls='ls --color=auto'
 alias la='ls -a'
 alias l='ls -alh'
@@ -349,10 +352,10 @@ if [[ $- = *i* ]]; then
         eval $( dircolors -b $HOME/.ls_colors )
     fi
 
-    # Attach to tmux session, if exist
+    # Notify about tmux session
     if command -v tmux &> /dev/null && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
         if tmux has-session &> /dev/null; then
-            tmux attach
+            echo -e "\033[1m\tThere are tmux session.\033[m Type\033[0;32m\033[1m t\033[m to attach"
         fi
     fi
 fi
