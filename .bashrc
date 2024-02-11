@@ -30,6 +30,18 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
+# Lightweight sandboxing
+hash firejail &> /dev/null && \
+ez() {
+    # Make cute path
+    local path="$PWD"
+    if [[ $path == $HOME* ]]; then
+      path="~${path#$HOME}"
+    fi
+    # EZ
+    env EZ_PATH=$path firejail --private="$(pwd)" "$@" bash
+}
+
 # Shortcut to create or open python virtual env
 hash python3 &> /dev/null && \
 pv() {
@@ -60,7 +72,7 @@ fkill() {
 
 # FZF change dirrectory
 hash fzf &> /dev/null && \
-function cd() {
+cd() {
     if [[ "$#" != 0 ]]; then
         builtin cd "$@";
         return
@@ -165,6 +177,7 @@ __powerline() {
     COLOR_CWD='\[\033[0;34m\]' # blue
     COLOR_GIT='\[\033[0;36m\]' # cyan
     COLOR_SUCCESS='\[\033[0;32m\]' # green
+    COLOR_VIRTUAL='\033[0;33m'     # yellow
     COLOR_FAILURE='\[\033[0;31m\]' # red
 
     SYMBOL_GIT_BRANCH=''
@@ -239,15 +252,20 @@ __powerline() {
             local git="$COLOR_GIT$(__git_info)$RESET"
         fi
 
-        # Print hostname for remote connections
-        if [ -z "$(w -i | grep -P '([0-9]{1,3}[\.]){3}[0-9]{1,3}')" ]; then
-            PS1="$cwd$git$symbol"
-        else
-            PS1="\[\033[01;32m\]\u@\h\[\033[00m\]: $cwd$git$symbol"
+        if [ -n "$EZ_PATH" ]; then
+            local ez="${COLOR_VIRTUAL}{$EZ_PATH}$RESET "
         fi
 
+        # Print hostname for remote connections
+        if [ -z "$(w -i | grep -P '([0-9]{1,3}[\.]){3}[0-9]{1,3}')" ]; then
+            PS1="$ez$cwd$git$symbol"
+        else
+            PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:$ez $cwd$git$symbol"
+        fi
+
+        # Python virtual env marker
         if [ -n "$VIRTUAL_ENV" ]; then
-            PS1="\033[0;33m($(basename "$VIRTUAL_ENV"))\033[m $PS1"
+            PS1="${COLOR_VIRTUAL}($(basename "$VIRTUAL_ENV"))$RESET $PS1"
         fi
     }
 
