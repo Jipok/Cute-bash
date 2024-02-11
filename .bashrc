@@ -90,6 +90,7 @@ extract () {
         *.tbz)      tar -xjvf "$1";;
         *.tgz)      tar xzf "$1"  ;;
         *.zip)      unzip "$1"    ;;
+        *.jar)      unzip "$1"    ;;
         *.Z)        uncompress $1 ;;
         *.7z)       7z x "$1"     ;;
         *.xz)       unxz "$1"     ;;
@@ -114,6 +115,34 @@ pk () {
         zip)        zip -r "$2".zip "$2"         ;;
         7z)         7z a "$2".7z "$2"            ;;
         *)          echo "'$1' cannot be packed via pk()" ;;
+    esac
+}
+
+# Universal archive content list command
+# example: list ./archive
+list () {
+    if [ ! -f "$1" ] ; then
+        echo "'$1' does not exist"
+        return 1
+    fi
+
+    case $1 in
+        *.tar.bz2)  tar tjf "$1"  ;;
+        *.tar.gz)   tar tzf "$1"  ;;
+        *.tar.xz)   tar tJf "$1" ;;
+        *.tar)      tar tvf "$1"  ;;
+        *.bz2)      bunzip2 -tv "$1"  ;;
+        *.rar)      unrar l "$1"  ;;
+        *.gz)       gunzip -t "$1"   ;;
+        *.tbz2)     tar tjf "$1"  ;;
+        *.tbz)      tar -tjvf "$1";;
+        *.tgz)      tar tzf "$1"  ;;
+        *.zip)      unzip -l "$1"    ;;
+        *.jar)      unzip -l "$1"    ;;
+        *.Z)        echo "cannot list files in compressed archive" ;;
+        *.7z)       7z l "$1"     ;;
+        *.xz)       unxz -l "$1"     ;;
+        *)          echo "I don't know how to list files in '$1'..." ;;
     esac
 }
 
