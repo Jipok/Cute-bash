@@ -8,6 +8,9 @@ alias mkcd='_(){ mkdir -p "$(echo $@)"; cd "$(echo $@)"; }; _'
 # Tmux attach or new with mouse support
 alias t='tmux set-option -g mouse on \; attach || tmux set-option -g mouse on \; new'
 
+# Display the local time and the delta in human-readable format
+alias dmesg='dmesg -e'
+
 alias ls='ls --color=auto'
 alias la='ls -a'
 alias l='ls -alh'
