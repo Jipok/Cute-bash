@@ -30,6 +30,17 @@ export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
+# Shortcut to create or open python virtual env
+hash python3 &> /dev/null && \
+pv() {
+    if [ -d ./venv ]; then
+        source venv/bin/activate
+    else
+        echo -e "\033[0;32mRunning: python3 -m venv venv\033[m"
+        python3 -m venv venv
+
+    fi
+}
 
 # FZF kill processes - list only the ones you can kill. Modified the earlier script.
 hash fzf &> /dev/null && \
