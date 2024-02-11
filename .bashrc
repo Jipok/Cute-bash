@@ -45,8 +45,10 @@ ez() {
 # Shortcut to create or open python virtual env
 hash python3 &> /dev/null && \
 pv() {
-    if [ -d ./venv ]; then
-        source venv/bin/activate
+    # Venv autodetect
+    local venv=`find . -maxdepth 2 -name "pyvenv.cfg" -type f -exec dirname {} \; | head -n1`
+    if [ -n "$venv" ]; then
+        source $venv/bin/activate
     else
         echo -e "\033[0;32mRunning: python3 -m venv venv\033[m"
         python3 -m venv venv
