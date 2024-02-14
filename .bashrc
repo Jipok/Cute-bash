@@ -2,6 +2,12 @@
 PATH="$PATH:$HOME/.local/bin"
 export TERM=xterm-256color
 
+# Human editors
+hash nano &> /dev/null && \
+export EDITOR=nano
+hash dte &> /dev/null && \
+export EDITOR=dte
+
 # Make and change directory at once
 alias mkcd='_(){ mkdir -p "$(echo $@)"; cd "$(echo $@)"; }; _'
 
