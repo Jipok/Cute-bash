@@ -18,6 +18,7 @@ Useful default settings for bash in one file
 - - Platform-dependent prompt symbols
 - - *Mod*: Shows the hostname when logging in via ssh
 - Colored less
+- Uses user aliases(and other settings) from `~/.bash-user`
 - Alias `mkcd` - make and change directory at once
 - Alias `t` - tmux attach or new session with mouse support
 - Aliases `ls`, `la`, `l`, `gitlog`, `gittree`

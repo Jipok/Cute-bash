@@ -8,6 +8,9 @@ export EDITOR=nano
 hash dte &> /dev/null && \
 export EDITOR=dte
 
+# Import user aliases/settings
+[ -f ~/.bash-user ] && . ~/.bash-user
+
 # Make and change directory at once
 alias mkcd='_(){ mkdir -p "$(echo $@)"; cd "$(echo $@)"; }; _'
 
@@ -430,6 +433,7 @@ if [[ $- = *i* ]]; then
         fi
         . $HOME/.bash_complete_alias
     fi
+    complete -F _complete_alias "${!BASH_ALIASES[@]}"
 
     # Notify about tmux session
     if command -v tmux &> /dev/null && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
