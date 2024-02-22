@@ -26,6 +26,7 @@ Useful default settings for bash in one file
 - Will provide new commands `cd` and `fkill`, if `fzf` installed
 - Automatically downloads and uses [LS_COLORS](https://github.com/trapd00r/LS_COLORS) 
 ([Screenshot](https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/docs/static/LS_COLORS.png))
+- Automatically downloads and uses [complete_alias](https://github.com/cykerway/complete-alias) 
 - On each login will notify if `tmux` session available 
 
 ## Installation
@@ -35,13 +36,19 @@ Per user:
 
 System-wide(debian, arch):
 
-`wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/bash.bashrc`
+```bash
+wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/bash.bashrc
+mkdir /etc/bash
+wget "https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS" -O /etc/bash/ls_colors
+wget "https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias" -O /etc/bash/complete_alias
+```
 
 System-wide(void linux):
 
 ```bash
 wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/bash/bashrc
 wget "https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS" -O /etc/bash/ls_colors
+wget "https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias" -O /etc/bash/complete_alias
 ```
 
 Of course this will replace the original files if they were. Also recommend `sudo rm /etc/skel/.bashrc` 

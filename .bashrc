@@ -421,6 +421,16 @@ if [[ $- = *i* ]]; then
         eval $( dircolors -b $HOME/.ls_colors )
     fi
 
+    # Download and use complete_alias
+    if [ -f /etc/bash/complete_alias ]; then
+        . /etc/bash/complete_alias
+    else    
+        if [ ! -f $HOME/.complete_alias ]; then
+            wget "https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias" -O ~/.bash_complete_alias
+        fi
+        . $HOME/.bash_complete_alias
+    fi
+
     # Notify about tmux session
     if command -v tmux &> /dev/null && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
         if tmux has-session &> /dev/null; then
