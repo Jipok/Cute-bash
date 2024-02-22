@@ -347,8 +347,8 @@ __sensible () {
     PROMPT_COMMAND='history -a'
 
     # Huge history. Doesn't appear to slow things down, so why not?
-    HISTSIZE=500000
-    HISTFILESIZE=1000000
+    HISTSIZE=
+    HISTFILESIZE=
 
     # Change the file location because certain bash sessions truncate .bash_history
     export HISTFILE=~/.history_bash
@@ -357,12 +357,12 @@ __sensible () {
     HISTCONTROL="erasedups:ignoreboth"
 
     # Don't record some commands
-    export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+    export HISTIGNORE="&:[ ]*:exit:ls:l:t:bg:fg:history:clear"
 
     # Use standard ISO 8601 timestamp
     # %F equivalent to %Y-%m-%d
     # %T equivalent to %H:%M:%S (24-hours format)
-    HISTTIMEFORMAT='%F %T '
+    HISTTIMEFORMAT='[%F %T] '
 
     # Enable incremental history search with up/down arrows (also Readline goodness)
     # Learn more about this here: http://codeinthehole.com/writing/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/
