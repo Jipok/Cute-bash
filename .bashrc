@@ -397,6 +397,11 @@ __sensible () {
     # export dropbox="$HOME/Dropbox"
 }
 
+check_tmux_session() {
+    if tmux has-session &> /dev/null; then
+        echo -e "\033[1m\tThere are tmux session.\033[m Type\033[0;32m\033[1m t\033[m to attach"
+    fi
+}
 
 # Check we're in an interactive shell
 if [[ $- = *i* ]]; then
@@ -437,8 +442,10 @@ if [[ $- = *i* ]]; then
 
     # Notify about tmux session
     if command -v tmux &> /dev/null && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-        if tmux has-session &> /dev/null; then
-            echo -e "\033[1m\tThere are tmux session.\033[m Type\033[0;32m\033[1m t\033[m to attach"
-        fi
+        # Run in background because tmux may hang 
+        # Run in subshell to prevent display "[0] Done" message
+        (check_tmux_session &)
     fi
 fi
+
+unset -f check_tmux_session
