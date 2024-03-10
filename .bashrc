@@ -123,6 +123,7 @@ extract () {
         *.tbz2)     tar xjf "$1"  ;;
         *.tbz)      tar -xjvf "$1";;
         *.tgz)      tar xzf "$1"  ;;
+        *.apk)      unzip "$1"    ;;
         *.zip)      unzip "$1"    ;;
         *.jar)      unzip "$1"    ;;
         *.Z)        uncompress $1 ;;
@@ -171,6 +172,7 @@ list () {
         *.tbz2)     tar tjf "$1"  ;;
         *.tbz)      tar -tjvf "$1";;
         *.tgz)      tar tzf "$1"  ;;
+        *.apk)      unzip -l "$1"    ;;
         *.zip)      unzip -l "$1"    ;;
         *.jar)      unzip -l "$1"    ;;
         *.Z)        echo "cannot list files in compressed archive" ;;
