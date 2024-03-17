@@ -242,6 +242,12 @@ __powerline() {
         printf " $ref$marks"
     }
 
+    # Detect sshd in the current process tree
+    hash pstree &> /dev/null && \
+       [[ `pstree -s $PPID | grep sshd` ]] && export CUTE_BASH_SHOW_HOSTNAME=1
+    # Show hostname for tmux sessions
+    [[ -n "$TMUX" ]] && export CUTE_BASH_SHOW_HOSTNAME=1
+
     ps1() {
         # Check the exit code of the previous command and display different
         # colors in the prompt accordingly.
@@ -269,8 +275,7 @@ __powerline() {
             local ez="${COLOR_VIRTUAL}{$EZ_PATH}$RESET "
         fi
 
-        # Print hostname for remote connections
-        if [ -z "$(w -i | grep -P '([0-9]{1,3}[\.]){3}[0-9]{1,3}')" ]; then
+        if [[ -z "$CUTE_BASH_SHOW_HOSTNAME" ]]; then
             PS1="$ez$cwd$git$symbol"
         else
             PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:$ez $cwd$git$symbol"
