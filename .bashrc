@@ -59,9 +59,9 @@ pv() {
     if [ -n "$venv" ]; then
         source $venv/bin/activate
     else
-        echo -e "\033[0;32mRunning: python3 -m venv venv\033[m"
-        python3 -m venv venv
-
+        echo -e "\033[0;32mRunning: python3 -m venv venv --system-site-packages\033[m"
+        python3 -m venv venv --system-site-packages 
+        source venv/bin/activate
     fi
 }
 
