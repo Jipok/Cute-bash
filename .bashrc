@@ -423,8 +423,18 @@ if [[ $- = *i* ]]; then
         source /usr/share/doc/fzf/key-bindings.bash
 
     # Use bash-completion, if available
-    [ -f /usr/share/bash-completion/bash_completion ] && \
-        source /usr/share/bash-completion/bash_completion
+    # [ -f /usr/share/bash-completion/bash_completion ] && \
+    #     source /usr/share/bash-completion/bash_completion
+
+    # Download and use compatible bash-completion
+    if [ -f /etc/bash/bash-completion-2.11 ]; then
+        . /etc/bash/bash-completion-2.11
+    else
+        if [ ! -f $HOME/.bash-completion-2.11 ]; then
+            wget "https://raw.githubusercontent.com/scop/bash-completion/2.11/bash_completion" -O ~/.bash-completion-2.11
+        fi
+        . $HOME/.bash-completion-2.11
+    fi   
 
     # Download and use LS_COLORS
     if [ -f /etc/bash/ls_colors ]; then

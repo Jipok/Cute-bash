@@ -4,7 +4,7 @@ Useful default settings for bash in one file
 ![image](https://user-images.githubusercontent.com/25588359/107625132-c6e65000-6c53-11eb-8673-80a8c9febdd4.png)
 
 ## Features
-- One file. Easy installation
+- Easy installation
 - Includes [bash-sensible](https://github.com/mrzool/bash-sensible):
 - - Smarter tab completion
 - - Saner history defaults
@@ -23,8 +23,8 @@ Useful default settings for bash in one file
 - Alias `t` - tmux attach or new session with mouse support
 - Aliases `ls`, `la`, `l`, `gitlog`, `gittree`
 - Universal commands for extracting(`extract`), `list` and packing(`pk`) archives
-- Will use [bash-completion](https://github.com/scop/bash-completion), if installed
 - Will provide new commands `cd` and `fkill`, if `fzf` installed
+- Automatically downloads and uses [bash-completion](https://github.com/scop/bash-completion)
 - Automatically downloads and uses [LS_COLORS](https://github.com/trapd00r/LS_COLORS) 
 ([Screenshot](https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/docs/static/LS_COLORS.png))
 - Automatically downloads and uses [complete_alias](https://github.com/cykerway/complete-alias) 
@@ -42,6 +42,7 @@ wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/ba
 mkdir /etc/bash
 wget "https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS" -O /etc/bash/ls_colors
 wget "https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias" -O /etc/bash/complete_alias
+wget "https://raw.githubusercontent.com/scop/bash-completion/2.11/bash_completion" -O /etc/bash/bash-completion-2.11
 ```
 
 System-wide(void linux):
@@ -50,6 +51,7 @@ System-wide(void linux):
 wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/bash/bashrc
 wget "https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS" -O /etc/bash/ls_colors
 wget "https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias" -O /etc/bash/complete_alias
+wget "https://raw.githubusercontent.com/scop/bash-completion/2.11/bash_completion" -O /etc/bash/bash-completion-2.11
 ```
 
 Of course this will replace the original files if they were. Also recommend `sudo rm /etc/skel/.bashrc` 
