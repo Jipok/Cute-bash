@@ -48,7 +48,7 @@ wget "https://raw.githubusercontent.com/scop/bash-completion/2.11/bash_completio
 System-wide(void linux):
 
 ```bash
-wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/bash/bashrc
+wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/bash/bashrc.d/cute-bash.sh
 wget "https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS" -O /etc/bash/ls_colors
 wget "https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias" -O /etc/bash/complete_alias
 wget "https://raw.githubusercontent.com/scop/bash-completion/2.11/bash_completion" -O /etc/bash/bash-completion-2.11
