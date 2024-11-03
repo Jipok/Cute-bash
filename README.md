@@ -20,7 +20,6 @@ Useful default settings for bash in one file
 - Colored less
 - Uses user aliases(and other settings) from `~/.bash-user`
 - Alias `mkcd` - make and change directory at once
-- Alias `t` - tmux attach or new session with mouse support
 - Aliases `ls`, `la`, `l`, `gitlog`, `gittree`
 - Universal commands for extracting(`extract`), `list` and packing(`pk`) archives
 - Will provide new commands `cd` and `fkill`, if `fzf` installed
@@ -29,6 +28,14 @@ Useful default settings for bash in one file
 ([Screenshot](https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/docs/static/LS_COLORS.png))
 - Automatically downloads and uses [complete_alias](https://github.com/cykerway/complete-alias) 
 - On each login will notify if `tmux` session available 
+- Enhanced tmux integration `t`:
+  - Attach to existing session or create new one with mouse support
+  - Run as different user with `t username`
+
+## Requirements
+- Bash 4.0+
+- tmux (optional, for tmux integration)
+- fzf (optional, for enhanced cd/kill commands)
 
 ## Installation
 
@@ -56,3 +63,24 @@ wget "https://raw.githubusercontent.com/scop/bash-completion/2.11/bash_completio
 
 Of course this will replace the original files if they were. Also recommend `sudo rm /etc/skel/.bashrc` 
 
+## Customization
+
+
+Create `~/.bash-user` to add your own aliases and settings. Example:
+```bash
+# Custom aliases
+alias projects='cd ~/projects'
+alias gs='git status'
+
+# Custom environment variables
+export EDITOR=nvim
+
+# Disable git status
+POWERLINE_GIT=0
+```
+
+## Troubleshooting
+
+**Prompt symbols not displaying correctly**
+   - Make sure your terminal supports UTF-8
+   - Try installing a powerline-compatible font like https://nerdfonts.com

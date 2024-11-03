@@ -14,9 +14,6 @@ export EDITOR=dte
 # Make and change directory at once
 alias mkcd='_(){ mkdir -p "$(echo $@)"; cd "$(echo $@)"; }; _'
 
-# Tmux attach or new with mouse support
-alias t='tmux set-option -g mouse on \; attach || tmux set-option -g mouse on \; new'
-
 # Display the local time and the delta in human-readable format
 alias dmesg='dmesg -e'
 
@@ -38,6 +35,44 @@ export LESS_TERMCAP_so=$'\E[01;45;33m' # begin reverse video
 export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
 export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
 export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+
+# Enhanced tmux launcher: attaches to session or creates new one
+# Can switch/create users when argument provided
+# Example: t         - attach/create tmux session for current user
+#         t testuser - attach/create tmux session for specified user
+hash tmux &> /dev/null && \
+t() {
+    # Enable mouse support for tmux
+    local TMUX_OPTS="set-option -g mouse on"
+
+    # If no arguments provided, attach to existing session or create new one
+    if [ -z "$1" ]; then
+        tmux $TMUX_OPTS \; attach || tmux $TMUX_OPTS \; new
+        return
+    fi
+
+    # Try to switch to specified user
+    if su - "$1" -c "tmux $TMUX_OPTS \; attach || tmux $TMUX_OPTS \; new" 2>/dev/null; then
+        return
+    fi
+
+    # If user doesn't exist, propose to create it
+    echo "User '$1' does not exist."
+    read -p "Do you want to create user '$1'? (y/n): " answer
+
+    if [[ $answer =~ ^[Yy]$ ]]; then
+        # Create user without password
+        if useradd -m "$1"; then
+            echo "User '$1' created successfully."
+            # Switch to new user and start tmux
+            su - "$1" -c "tmux $TMUX_OPTS \; attach || tmux $TMUX_OPTS \; new"
+        else
+            echo "Failed to create user '$1'"
+        fi
+    else
+        echo "Operation cancelled."
+    fi
+}
 
 # Lightweight sandboxing
 hash firejail &> /dev/null && \
@@ -65,7 +100,7 @@ pv() {
     fi
 }
 
-# FZF kill processes - list only the ones you can kill. Modified the earlier script.
+# FZF kill processes - list only the ones you can kill
 hash fzf &> /dev/null && \
 fkill() {
     local pid
@@ -181,7 +216,6 @@ list () {
         *)          echo "I don't know how to list files in '$1'..." ;;
     esac
 }
-
 
 # MODIFIED https://github.com/riobard/bash-powerline
 __powerline() {
