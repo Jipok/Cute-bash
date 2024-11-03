@@ -21,6 +21,28 @@ alias ls='ls --color=auto'
 alias la='ls -a'
 alias l='ls -alh'
 
+# Common typos
+alias sl='ls'
+alias cd..='cd ..'
+
+# System info shortcuts
+alias df='df -h'
+alias free='free -h'
+alias du='du -h'
+alias psg='ps aux | grep'
+alias ncdu='ncdu -x'
+
+# Network shortcuts
+alias ports='netstat -tulanp'
+alias myip='curl https://ifconfig.co; echo'
+
+# Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git pull'
+
 alias gitlog="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative"
 alias gittree="git log --graph --date=short --branches --pretty=format:'%C(yellow)%h%C(reset) %ad | %C(75)%s%C(reset) %C(yellow)%d%C(reset) [%an]'"
 
@@ -154,7 +176,6 @@ extract () {
         *.bz2)      bunzip2 "$1"  ;;
         *.rar)      unrar x "$1"  ;;
         *.gz)       gunzip "$1"   ;;
-        *.tar)      tar xf "$1"   ;;
         *.tbz2)     tar xjf "$1"  ;;
         *.tbz)      tar -xjvf "$1";;
         *.tgz)      tar xzf "$1"  ;;
