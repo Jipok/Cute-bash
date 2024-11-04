@@ -65,21 +65,22 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 hash tmux &> /dev/null && \
 t() {
     # Enable mouse support for tmux
-    local TMUX_OPTS="set-option -g mouse on"
+    local TMUX_OPTS=${TMUX_OPTS:-'set-option -g mouse on \; set -g base-index 1 \; setw -g pane-base-index 1 \;'}
+    local TMUX_CMD="tmux $TMUX_OPTS attach 2>/dev/null || tmux $TMUX_OPTS new"
 
     # If no arguments provided, attach to existing session or create new one
     if [ -z "$1" ]; then
-        tmux $TMUX_OPTS \; attach || tmux $TMUX_OPTS \; new
+        eval $TMUX_CMD
         return
     fi
 
     # Try to switch to specified user
-    if su - "$1" -c "tmux $TMUX_OPTS \; attach || tmux $TMUX_OPTS \; new" 2>/dev/null; then
+    if su - "$1" -c "$TMUX_CMD" ; then
         return
     fi
 
     # If user doesn't exist, propose to create it
-    echo "User '$1' does not exist."
+    echo ""
     read -p "Do you want to create user '$1'? (y/n): " answer
 
     if [[ $answer =~ ^[Yy]$ ]]; then
@@ -87,7 +88,7 @@ t() {
         if useradd -m "$1"; then
             echo "User '$1' created successfully."
             # Switch to new user and start tmux
-            su - "$1" -c "tmux $TMUX_OPTS \; attach || tmux $TMUX_OPTS \; new"
+            su - "$1" -c "$TMUX_CMD"
         else
             echo "Failed to create user '$1'"
         fi
@@ -342,7 +343,7 @@ __powerline() {
         fi
     }
 
-    PROMPT_COMMAND="ps1${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+    PROMPT_COMMAND="history -a; ps1${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 }
 
 
@@ -406,7 +407,7 @@ __sensible () {
     shopt -s cmdhist
 
     # Record each line as it gets issued
-    PROMPT_COMMAND='history -a'
+    # PROMPT_COMMAND='history -a' 
 
     # Huge history. Doesn't appear to slow things down, so why not?
     HISTSIZE=
