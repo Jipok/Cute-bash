@@ -505,13 +505,14 @@ if [[ $- = *i* ]]; then
     # Download and use complete_alias
     if [ -f /etc/bash/complete_alias ]; then
         . /etc/bash/complete_alias
+        complete -F _complete_alias "${!BASH_ALIASES[@]}"
     else    
         if [ ! -f $HOME/.complete_alias ]; then
             wget "https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias" -O ~/.bash_complete_alias
         fi
         . $HOME/.bash_complete_alias
+        complete -F _complete_alias "${!BASH_ALIASES[@]}"
     fi
-    complete -F _complete_alias "${!BASH_ALIASES[@]}"
 
     # Notify about tmux session
     if command -v tmux &> /dev/null && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
