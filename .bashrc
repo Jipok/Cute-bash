@@ -97,6 +97,23 @@ t() {
     fi
 }
 
+hash tmux &> /dev/null && \
+_t_completion() {
+    local cur prev opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    # Если уже есть аргумент, не предлагаем автодополнение
+    if [[ ${#COMP_WORDS[@]} -gt 2 ]]; then
+        return 0
+    fi
+
+    opts=$(ls /home)
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
+}
+hash tmux &> /dev/null && complete -F _t_completion t
+
 # Lightweight sandboxing
 hash firejail &> /dev/null && \
 ez() {
