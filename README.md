@@ -23,7 +23,6 @@ Useful default settings for bash in one file
 - Aliases `ls`, `la`, `l`, `gitlog`, `gittree`
 - Universal commands for extracting(`extract`), `list` and packing(`pk`) archives
 - Will provide new commands `cd` and `fkill`, if `fzf` installed
-- Automatically downloads and uses [bash-completion](https://github.com/scop/bash-completion)
 - Automatically downloads and uses [LS_COLORS](https://github.com/trapd00r/LS_COLORS) 
 ([Screenshot](https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/docs/static/LS_COLORS.png))
 - Automatically downloads and uses [complete_alias](https://github.com/cykerway/complete-alias) 
@@ -49,7 +48,6 @@ wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/ba
 mkdir /etc/bash
 wget "https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS" -O /etc/bash/ls_colors
 wget "https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias" -O /etc/bash/complete_alias
-wget "https://raw.githubusercontent.com/scop/bash-completion/2.11/bash_completion" -O /etc/bash/bash-completion-2.11
 ```
 
 System-wide(void linux):
@@ -58,7 +56,6 @@ System-wide(void linux):
 wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O /etc/bash/bashrc.d/cute-bash.sh
 wget "https://raw.githubusercontent.com/trapd00r/LS_COLORS/master/LS_COLORS" -O /etc/bash/ls_colors
 wget "https://raw.githubusercontent.com/cykerway/complete-alias/master/complete_alias" -O /etc/bash/complete_alias
-wget "https://raw.githubusercontent.com/scop/bash-completion/2.11/bash_completion" -O /etc/bash/bash-completion-2.11
 ```
 
 Of course this will replace the original files if they were. Also recommend `sudo rm /etc/skel/.bashrc` 

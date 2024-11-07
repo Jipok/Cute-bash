@@ -36,6 +36,9 @@ alias ncdu='ncdu -x'
 alias ports='netstat -tulanp'
 alias myip='curl https://ifconfig.co; echo'
 
+alias rcp='rsync -avzhHlP'
+alias rcp-del='rsync -avzhHlP --delete'
+
 # Git shortcuts
 alias gs='git status'
 alias ga='git add'
@@ -360,7 +363,7 @@ __powerline() {
         fi
     }
 
-    PROMPT_COMMAND="history -a; ps1${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+    PROMPT_COMMAND="ps1${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 }
 
 
@@ -424,7 +427,7 @@ __sensible () {
     shopt -s cmdhist
 
     # Record each line as it gets issued
-    # PROMPT_COMMAND='history -a' 
+    PROMPT_COMMAND='history -a' 
 
     # Huge history. Doesn't appear to slow things down, so why not?
     HISTSIZE=
@@ -496,18 +499,18 @@ if [[ $- = *i* ]]; then
         source /usr/share/doc/fzf/key-bindings.bash
 
     # Use bash-completion, if available
-    # [ -f /usr/share/bash-completion/bash_completion ] && \
-    #     source /usr/share/bash-completion/bash_completion
+    [ -f /usr/share/bash-completion/bash_completion ] && \
+        source /usr/share/bash-completion/bash_completion
 
     # Download and use compatible bash-completion
-    if [ -f /etc/bash/bash-completion-2.11 ]; then
-        . /etc/bash/bash-completion-2.11
-    else
-        if [ ! -f $HOME/.bash-completion-2.11 ]; then
-            wget "https://raw.githubusercontent.com/scop/bash-completion/2.11/bash_completion" -O ~/.bash-completion-2.11
-        fi
-        . $HOME/.bash-completion-2.11
-    fi   
+    # if [ -f /etc/bash/bash-completion-2.11 ]; then
+    #     . /etc/bash/bash-completion-2.11
+    # else
+    #     if [ ! -f $HOME/.bash-completion-2.11 ]; then
+    #         wget "https://raw.githubusercontent.com/scop/bash-completion/2.11/bash_completion" -O ~/.bash-completion-2.11
+    #     fi
+    #     . $HOME/.bash-completion-2.11
+    # fi
 
     # Download and use LS_COLORS
     if [ -f /etc/bash/ls_colors ]; then
