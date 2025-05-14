@@ -39,7 +39,10 @@ Useful default settings for bash in one file
 ## Installation
 
 Per user:
-`wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O ~/.bashrc`
+```
+wget https://raw.githubusercontent.com/Jipok/Cute-bash/master/.bashrc -O ~/.bashrc
+echo '[ -f ~/.bashrc ] && source ~/.bashrc' >> ~/.bash_profile
+```
 
 System-wide(debian, arch):
 
